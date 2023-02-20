@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <title>Doctor list</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-light bg-light">
+    <a class="navbar-brand" href="/">Hospital Manager</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<h2 class="h2">Doctors List</h2>
+
+<table class="table" style="width: 60%; border-radius: 10px;">
+    <thead class="thead-dark" style="border-radius: 25px">
+        <tr>
+            <th style="text-align: center">Id</th>
+            <th style="text-align: center">Name</th>
+            <th style="text-align: center">Speciality</th>
+            <th style="text-align: center">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="text-align: center" th:if="${doctors.isEmpty()}">
+            <td colspan="2">No doctor registered</td>
+        </tr>
+        <tr style="text-align: center" th:each="doctor : ${doctors}">
+            <td style="text-align: center" class="doctorId" th:text="${doctor.id}">Id</td>
+            <td style="text-align: center" th:text="${doctor.name}">Name</td>
+            <td style="text-align: center" th:text="${doctor.specialty}">Speciality</td>
+            <td>
+                <button class="btn btn-danger delete-doctor-button" type="button" onclick="showDeleteConfirmation()">
+                    <i class="fas fa-trash-alt"></i> Delete
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+<style>
+
+    body {
+        background: linear-gradient(to right, rgba(193, 199, 203, 0.35), #afb5c0);
+        font-family: 'Roboto', sans-serif;
+    }
+    table {
+        border-collapse:collapse;
+        border:none;
+        border-radius:10px;
+        margin-top: 25px;
+        margin-left: 40vh;
+        background: rgba(255, 255, 255, 0.95);
+    }
+
+    td, th {
+        border-left:none;
+        border-top:none;
+    }
+
+    th {
+        background-color: blue;
+        border-top: none;
+    }
+
+    td:first-child, th:first-child {
+        border-left: none;
+    }
+
+    .h2 {
+        text-align: center;
+        margin-top: 40px;
+        border-radius: 20px;
+        font-weight: bold;
+        width: 50%;
+        margin-left: 25%;
+    }
+
+</style>
+
+<script>
+    const deleteButtons = document.querySelectorAll('.delete-doctor-button');
+    deleteButtons.forEach(function(deleteButton) {
+        deleteButton.addEventListener("click", function() {
+            if (confirm("Are you sure?")) {
+                const doctorId = this.parentNode.parentNode.querySelector(".doctorId").textContent;
+                fetch('/mvc/doctor/' + doctorId, {
+                    method: 'DELETE'
+                }).then(function(response) {
+                    if (response.ok) {
+                        alert("Doctor deleted successfully");
+                        location.reload(); // Reload the page to update the table
+                    } else {
+                        alert("Error deleting doctor");
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>
